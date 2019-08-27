@@ -11,7 +11,7 @@ export default class AppHeader extends Component
     {
         return(
             <View>
-                <Text style={{backgroundColor:'green',color:'white'}}>{this.props.title}</Text>
+                <Text style={{backgroundColor:'green',color:'white',lineHeight:50}}>{this.props.title}</Text>
             </View>
         )
     }

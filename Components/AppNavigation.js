@@ -2,7 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator,createAppContainer} from 'react-navigation';
 import {View,Text} from 'react-native';
 import DailyMassReadings from './DailyCatholicReadings';
-
+import HolyRosary from './HolyRosary';
 class HomeScreen extends React.Component {
   render() {
     return (
@@ -25,7 +25,7 @@ class SettingsScreen extends React.Component {
 
 const TabNavigator = createBottomTabNavigator({
    "Daily Readings": { screen: DailyMassReadings },
-   "Holy Rosary": { screen: SettingsScreen },
+   "Holy Rosary": { screen: HolyRosary },
    "Hymns":{screen:HomeScreen},
    "Prayers":{screen:HomeScreen}
 });

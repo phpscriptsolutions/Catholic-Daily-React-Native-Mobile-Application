@@ -177,9 +177,10 @@ async fetchTodayReadings(e)
     render()
     {
         return(
-            
+            <View>
+                
             <ScrollView>
-                <AppHeader title='Daily Mass Readings' />
+            <AppHeader title='Daily Mass Readings' />
                 <Text style={{marginLeft:'2%'}}>Date: {this.state.Date}</Text>
                 <Text style={{marginLeft:'2%'}}>Title:{this.state.ReadingList.Title}</Text>
                 <Text style={{marginLeft:'2%'}}>First Reading: {this.state.FirstReading}</Text>
@@ -196,12 +197,12 @@ async fetchTodayReadings(e)
                 <Text style={{marginLeft:'2%'}}>{this.state.SecondReading!==''?
                 'Second Reading: '+ this.state.SecondReading:''}</Text>
                 <Text>{this.state.SecondReadingBody}</Text>
-                <Text style={{marginLeft:'2%'}}>Gospel : {this.state.Gospel}</Text>
+                <Text style={{marginLeft:'4%'}}>Gospel : {this.state.Gospel}</Text>
                 <Text style={{margin:'4%'}}>{this.state.GospelReadingBody}</Text>
                 <Text style={{marginLeft:'2%',fontStyle:"italic"}}>{this.state.GospelReadingBody!==''?'The gospel of the Lord...praise be to you Lord Jesus Christ!':''}</Text>
                 </ScrollView>
             </ScrollView>
-           
+           </View>
         )
     }
 
