@@ -1,7 +1,9 @@
 import React,{Component} from 'react';
-import {Text,View,ScrollView} from 'react-native';
+import {Text,View,ScrollView,Alert,Button,ActivityIndicator} from 'react-native';
+import NetInfo from '@react-native-community/netinfo';
 import {Fragment,} from 'react-native/Libraries/NewAppScreen';
 import AppHeader from './AppHeader';
+import Dialog, { DialogContent } from 'react-native-modal';
 export default class DailyMassReadings extends React.Component
 {
 
@@ -25,7 +27,9 @@ export default class DailyMassReadings extends React.Component
          FirstReadingBody:'',
          PsalmReadingBody:'',
          SecondReadingBody:'',
-         GospelReadingBody:''
+         GospelReadingBody:'',
+         NetworkState:false,
+         Loading:true
       }
 
       this.handleOnChange=this.handleOnChange.bind(this);
@@ -131,7 +135,7 @@ async fetchReadingText(e)
                 // }
                  this.state.GospelReadingText.map(e=>
                   {
-                    
+        
                       GospelReadingText=GospelReadingText+e.Text
                      
                  })
@@ -169,18 +173,33 @@ async fetchTodayReadings(e)
 
  componentDidMount()
 {
-    var date=new Date().getFullYear()+'-'+ parseInt(new Date().getMonth()+1)+'-'+new Date().getDate().toString();
-   this.setState({Date:date})
-    this.fetchTodayReadings(date)
+    NetInfo.fetch().then(state=>{
+       this.setState({NetworkState:state.isConnected});
+        
+    })
+    
+    
+    if(!this.state.NetworkState)
+    {
+        var date=new Date().getFullYear()+'-'+ parseInt(new Date().getMonth()+1)+'-'+new Date().getDate().toString();
+        this.setState({Date:date})
+         this.fetchTodayReadings(date)
+    }
+  
   
 }
     render()
     {
+        
         return(
+            
+
             <View>
                 
+                 
             <ScrollView>
-            <AppHeader title='Daily Mass Readings' />
+ 
+            <AppHeader title='Daily Mass Readings' color={this.state.ReadingList.Color} />
                 <Text style={{marginLeft:'2%'}}>Date: {this.state.Date}</Text>
                 <Text style={{marginLeft:'2%'}}>Title:{this.state.ReadingList.Title}</Text>
                 <Text style={{marginLeft:'2%'}}>First Reading: {this.state.FirstReading}</Text>
@@ -202,8 +221,22 @@ async fetchTodayReadings(e)
                 <Text style={{marginLeft:'2%',fontStyle:"italic"}}>{this.state.GospelReadingBody!==''?'The gospel of the Lord...praise be to you Lord Jesus Christ!':''}</Text>
                 </ScrollView>
             </ScrollView>
+           
            </View>
-        )
+             
+            //  :
+            //  <View>
+            //      {
+            //          Alert.alert(
+            //             'Error',
+            //             'Internet Connectivity Not Detected'
+            //         )
+                  
+            //      }
+            //  </View>
+             
+             
+        );
     }
 
 }

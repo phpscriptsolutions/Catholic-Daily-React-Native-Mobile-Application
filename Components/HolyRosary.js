@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View,StyleSheet} from 'react-native';
+import {Text,View,StyleSheet,Image} from 'react-native';
 import AppHeader from './AppHeader';
 import { ScrollView } from 'react-native-gesture-handler';
 export default class HolyRosary extends Component
@@ -18,6 +18,25 @@ export default class HolyRosary extends Component
                 <Text style={styles.TextMargin}>Our Father, Who art in heaven, hallowed be Thy name; Thy kingdom come; Thy will be done on earth as it is in heaven. Give us this day our daily bread; and forgive us our trespasses as we forgive those who trespass against us; and lead us not into temptation, but deliver us from evil, Amen.</Text>
                 <Text style={styles.TextSubHeader }>On the following three small beads, pray three Hail Marys</Text>
                 <Text style={styles.TextMargin}>Hail Mary, full of grace. The Lord is with thee. Blessed art thou among women, and blessed is the fruit of thy womb, Jesus. Holy Mary, Mother of God, pray for us sinners, now and at the hour of our death. Amen.</Text>
+                <Text style={styles.TextSubHeader}>Mysteries.</Text>
+                <Text style={styles.TextSubHeader}>Glorious Mystery (Sundays and Wednesdays).</Text>
+                <Text style={styles.TextMargin}>The Resurrection.</Text>
+                <Text style={styles.TextMargin}>The Ascension.</Text>
+                <Text style={styles.TextMargin}>The Descend of the Holy Spirit.</Text>
+                <Text style={styles.TextMargin}>The Assumption.</Text>
+                <Text style={styles.TextMargin}>The Coronation.</Text>
+                <Text style={styles.TextSubHeader}>Joyful Mystery (Mondays and Saturdays).</Text>
+                <Text style={styles.TextMargin}>The Annunciation.</Text>
+                <Text style={styles.TextMargin}>The Visitation.</Text>
+                <Text style={styles.TextMargin}>The Nativity.</Text>
+                <Text style={styles.TextMargin}>The Presentation.</Text>
+                <Text style={styles.TextMargin}>The Finding of our lord in the temple.</Text>
+                <Text style={styles.TextSubHeader}>Sorrowful Mystery (Tuesdays and Fridays).</Text>
+                <Text style={styles.TextMargin}>The Agony in the garden.</Text>
+                <Text style={styles.TextMargin}>The Scourging at the pilar.</Text>
+                <Text style={styles.TextMargin}>The Crowning with thorns.</Text>
+                <Text style={styles.TextMargin}>The Carrying of the cross.</Text>
+                <Text style={styles.TextMargin}>The Crucifixion.</Text>
             </ScrollView>
             </View>
 
@@ -28,14 +47,14 @@ export default class HolyRosary extends Component
 const styles=StyleSheet.create({
     TextHeader:{
         fontSize:20,
-        margin:'2%'
+        margin:'1.5%'
     },
     TextSubHeader:{
         fontSize:15,
         fontWeight:"bold",
-        margin:'2%'
+        margin:'1.5%'
     },
     TextMargin:{
-        margin:'2%'
+        margin:'1.5%'
     }
 })

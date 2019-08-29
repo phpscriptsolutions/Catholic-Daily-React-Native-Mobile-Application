@@ -53,6 +53,7 @@ render()
      fontSize:16}}>
        Preaching the gospel through technology
      </Text>
+    
 
     </View>
       :
