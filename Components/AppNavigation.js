@@ -4,11 +4,14 @@ import {View,Text} from 'react-native';
 import DailyMassReadings from './DailyCatholicReadings';
 import HolyRosary from './HolyRosary';
 import DivineMercy from './DivineMercy';
+import AppHeader from './AppHeader';
 class About extends React.Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Preaching the Gospel through technology!</Text>
+      <View>
+      
+      <AppHeader title='About Daily Catholic Encounter'/>
+        <Text style={{marginTop:'40%'}}>Preaching the Gospel through technology!</Text>
       </View>
     );
   }

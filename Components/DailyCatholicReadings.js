@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View,ScrollView,Alert,Button,ActivityIndicator,StyleSheet} from 'react-native';
+import {Text,View,ScrollView,Alert,Button,ActivityIndicator,Image} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {Fragment,} from 'react-native/Libraries/NewAppScreen';
 import AppHeader from './AppHeader';
@@ -127,6 +127,12 @@ async fetchReadingText(e)
 
 async fetchTodayReadings(e)
 {
+    if(!this.state.NetworkState)
+    {
+
+        Alert.alert('Network Error','Internet connection not detected');
+        return;
+    }
     
     await fetch('https://www.ewtn.com/se/readings/readingsservice.svc/day/'+e+'/en')
     .then((response)=>response.json())
@@ -174,7 +180,8 @@ async fetchTodayReadings(e)
 
             <View>
                 
-                 
+                
+                 {this.state.NetworkState?
             <ScrollView>
  
             <AppHeader title='Daily Mass Readings' color={this.state.ReadingList.Color} />
@@ -199,19 +206,16 @@ async fetchTodayReadings(e)
                 <Text style={{marginLeft:'2%',fontStyle:"italic"}}>{this.state.GospelReadingBody!==''?'The gospel of the Lord...praise be to you Lord Jesus Christ!':''}</Text>
                 </ScrollView>
             </ScrollView>
+            :
+                 <Text style={{marginLeft:'4%',marginTop:'60%'}}>Internet Network Not Detected! Kindly Switch On Your Mobile Internet Network 
+                or Connect to a Wifi network!
+                 </Text>
+             
+                 }
            
            </View>
              
-            //  :
-            //  <View>
-            //      {
-            //          Alert.alert(
-            //             'Error',
-            //             'Internet Connectivity Not Detected'
-            //         )
-                  
-            //      }
-            //  </View>
+       
              
              
         );
