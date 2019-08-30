@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {Text,View,ScrollView,Alert,Button,ActivityIndicator} from 'react-native';
+import {Text,View,ScrollView,Alert,Button,ActivityIndicator,StyleSheet} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {Fragment,} from 'react-native/Libraries/NewAppScreen';
 import AppHeader from './AppHeader';
@@ -111,28 +111,6 @@ async fetchReadingText(e)
                     
                 }):SecondReadingText=''
 
-                // for(var a=0;a<this.state.PsalmReadingText;a++)
-                // {
-                //     Psalm=Psalm+this.state.PsalmReadingText[a].Text
-                // }
-                // for(var a=0;a<this.state.PsalmReadingText;a++)
-                // {
-                //     Psalm=Psalm+this.state.PsalmReadingText[a].Text
-                // }
-            
-                // // this.state.SecondReadingText.length>0?
-                // // this.state.SecondReadingText.map(e=>
-                // // {
-                // //     return(
-                // //     SecondReadingText=SecondReadingText+e.Text
-                // //     )
-                // // }):SecondReadingText=''
-
-                // for(var a=0;a<this.state.GospelReadingText;a++)
-                // {
-                //     GospelReadingText=GospelReadingText+this.state.PsalmReadingText[a].Text
-                //     alert(GospelReadingText);
-                // }
                  this.state.GospelReadingText.map(e=>
                   {
         
@@ -210,14 +188,14 @@ async fetchTodayReadings(e)
                 <Text style={{borderBottomColor: 'black',borderBottomWidth: 1,}}></Text>
                 <Text style={{margin:'4%'}}>First Reading:{this.state.FirstReading} </Text>
                 <ScrollView contentContainerStyle={{flexGrow:1}}>
-                <Text style={{margin:'4%'}}>{this.state.FirstReadingBody}</Text>
+                <Text style={{marginLeft:'4%',marginTop:'1%'}}>{this.state.FirstReadingBody}</Text>
                 <Text style={{margin:'4%',color:'red'}}>Responsiorial Psalm:{this.state.Psalm}</Text>
-                <Text style={{margin:'4%'}}>{this.state.PsalmReadingBody}</Text>
+                <Text style={{marginLeft:'4%',marginTop:'1%'}}>{this.state.PsalmReadingBody}</Text>
                 <Text style={{marginLeft:'2%'}}>{this.state.SecondReading!==''?
                 'Second Reading: '+ this.state.SecondReading:''}</Text>
                 <Text>{this.state.SecondReadingBody}</Text>
                 <Text style={{marginLeft:'4%'}}>Gospel : {this.state.Gospel}</Text>
-                <Text style={{margin:'4%'}}>{this.state.GospelReadingBody}</Text>
+                <Text style={{marginLeft:'4%',marginTop:'4%'}}>{this.state.GospelReadingBody}</Text>
                 <Text style={{marginLeft:'2%',fontStyle:"italic"}}>{this.state.GospelReadingBody!==''?'The gospel of the Lord...praise be to you Lord Jesus Christ!':''}</Text>
                 </ScrollView>
             </ScrollView>
@@ -240,3 +218,6 @@ async fetchTodayReadings(e)
     }
 
 }
+const styles=StyleSheet.create({
+
+})
