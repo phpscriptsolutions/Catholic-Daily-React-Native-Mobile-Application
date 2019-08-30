@@ -218,6 +218,3 @@ async fetchTodayReadings(e)
     }
 
 }
-const styles=StyleSheet.create({
-
-})
