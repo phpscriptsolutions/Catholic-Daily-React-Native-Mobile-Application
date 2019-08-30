@@ -29,7 +29,8 @@ export default class DailyMassReadings extends React.Component
          SecondReadingBody:'',
          GospelReadingBody:'',
          NetworkState:false,
-         Loading:true
+         Loading:true,
+         Error:''
       }
 
       this.handleOnChange=this.handleOnChange.bind(this);
@@ -67,8 +68,13 @@ async fetchReadingText(e)
       //  alert(this.state.Readings.length)
     })
     .catch((error)=>{
-        alert(error.message);
+       this.setState({Error:error})
     })
+    if(this.state.Error!=='')
+    {
+        Alert.alert('Network Error','Internet Network Connection Not Detected');
+        return;
+    }
       
 
     this.state.Readings.length===3?
@@ -127,20 +133,26 @@ async fetchReadingText(e)
 
 async fetchTodayReadings(e)
 {
-    if(!this.state.NetworkState)
-    {
-
-        Alert.alert('Network Error','Internet connection not detected');
-        return;
-    }
+    NetInfo.fetch().then(state=>{
+        this.setState({NetworkState:state.isConnected});
+         
+     })
+     
+  
     
     await fetch('https://www.ewtn.com/se/readings/readingsservice.svc/day/'+e+'/en')
     .then((response)=>response.json())
+    .catch((err)=>{
+        this.setState({Error:err});
+     return;
+    })
     .then((success)=>this.setState({ReadingList:success}))
     .catch((err)=>{
-        alert(err);
+        this.setState({Error:err});
+     return;
     });
-
+    this.state.Error!==''?
+    '':
     this.state.ReadingList.ReadingGroups[0].Readings.length===4?
 
          this.setState({FirstReading:this.state.ReadingList.ReadingGroups[0].Readings[0].Citations[0].Reference,
@@ -157,11 +169,7 @@ async fetchTodayReadings(e)
 
  componentDidMount()
 {
-    NetInfo.fetch().then(state=>{
-       this.setState({NetworkState:state.isConnected});
-        
-    })
-    
+ 
     
     if(!this.state.NetworkState)
     {
@@ -207,7 +215,9 @@ async fetchTodayReadings(e)
                 </ScrollView>
             </ScrollView>
             :
-                 <Text style={{marginLeft:'4%',marginTop:'60%'}}>Internet Network Not Detected! Kindly Switch On Your Mobile Internet Network 
+                 <Text style={{marginLeft:'4%',marginTop:'60%'}}>
+                     Internet Network Not Detected!
+                      Kindly Switch On Your Mobile Internet Network 
                 or Connect to a Wifi network!
                  </Text>
              

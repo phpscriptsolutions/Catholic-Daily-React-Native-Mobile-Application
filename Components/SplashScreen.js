@@ -16,9 +16,9 @@ export default class SplashScreen extends Component
         return(
         
            <View >
-               <Text style={{color:'green',marginTop:'70%',marginLeft:'10%',
+               <Text style={{color:'green',alignItems:'center',
             fontSize:16}}>
-                   Welcome to Catholic Daily Encounter
+                    Catholic Daily Encounter
                 </Text>
                 <Text style={{color:'green',marginTop:'1%',marginLeft:'5%',
              fontSize:16}}>

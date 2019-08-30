@@ -45,11 +45,11 @@ render()
   return(
     this.state.Loading?
     <View >
-    <Text style={{color:'green',marginTop:'70%',marginLeft:'10%',
+    <Text style={{color:'green',marginTop:'70%',textAlign: 'center', alignItems: 'center',
       fontSize:16}}>
-        Welcome to Catholic Daily Encounter
+        Catholic Daily Encounter
      </Text>
-     <Text style={{color:'green',marginTop:'1%',marginLeft:'5%',
+     <Text style={{color:'green',marginTop:'1%',textAlign:'center',
      fontSize:16}}>
        Preaching the gospel through technology
      </Text>
