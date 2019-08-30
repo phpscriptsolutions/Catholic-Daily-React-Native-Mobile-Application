@@ -11,7 +11,7 @@ class About extends React.Component {
       <View>
       
       <AppHeader title='About Daily Catholic Encounter'/>
-        <Text style={{marginTop:'40%'}}>Preaching the Gospel through technology!</Text>
+        <Text style={{marginTop:'40%',textAlign:'center'}}>Preaching the Gospel through technology!</Text>
       </View>
     );
   }
