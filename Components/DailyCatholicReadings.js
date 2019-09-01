@@ -2,8 +2,9 @@ import React,{Component} from 'react';
 import {Text,View,ScrollView,Alert,Button,ActivityIndicator,Image} from 'react-native';
 import NetInfo from '@react-native-community/netinfo';
 import {Fragment,} from 'react-native/Libraries/NewAppScreen';
+import DatePicker from 'react-native-datepicker';
 import AppHeader from './AppHeader';
-import Dialog, { DialogContent } from 'react-native-modal';
+
 export default class DailyMassReadings extends React.Component
 {
 
@@ -30,7 +31,8 @@ export default class DailyMassReadings extends React.Component
          GospelReadingBody:'',
          NetworkState:false,
          Loading:true,
-         Error:''
+         Error:'',
+         DateClicked:false
       }
 
       this.handleOnChange=this.handleOnChange.bind(this);
@@ -143,16 +145,27 @@ async fetchTodayReadings(e)
     await fetch('https://www.ewtn.com/se/readings/readingsservice.svc/day/'+e+'/en')
     .then((response)=>response.json())
     .catch((err)=>{
-        this.setState({Error:err});
+       Alert.alert('Error','Reading not available for ' + e);
+       this.setState({Error:err})
      return;
     })
-    .then((success)=>this.setState({ReadingList:success}))
+    .then((success)=>{
+        if(success)
+        {
+            this.setState({ReadingList:success})
+        }
+    })
     .catch((err)=>{
-        this.setState({Error:err});
+     
+        Alert.alert('Error','Reading not available for ' + e);
+        this.setState({Error:err})
      return;
     });
-    this.state.Error!==''?
-    '':
+    if(this.state.Error!=='')
+    {
+        Alert.alert('Error','Reading not available for ' + e);
+        return;
+    }
     this.state.ReadingList.ReadingGroups[0].Readings.length===4?
 
          this.setState({FirstReading:this.state.ReadingList.ReadingGroups[0].Readings[0].Citations[0].Reference,
@@ -165,6 +178,11 @@ async fetchTodayReadings(e)
                             Gospel:this.state.ReadingList.ReadingGroups[0].Readings[2].Citations[0].Reference,
                         SecondReading:''})
                         this.fetchReadingText(e);
+}
+
+DateChange()
+{
+this.setState({DateClicked:true})
 }
 
  componentDidMount()
@@ -180,6 +198,8 @@ async fetchTodayReadings(e)
   
   
 }
+
+
     render()
     {
         
@@ -193,7 +213,29 @@ async fetchTodayReadings(e)
             <ScrollView>
  
             <AppHeader title='Daily Mass Readings' color={this.state.ReadingList.Color} />
-                <Text style={{marginLeft:'2%'}}>Date: {this.state.Date}</Text>
+            <DatePicker
+        style={{width: 200}}
+        date={this.state.Date}
+        mode="date"
+        placeholder="select date"
+        format="YYYY-MM-DD"
+        
+        confirmBtnText="Confirm"
+        cancelBtnText="Cancel"
+        customStyles={{
+          dateIcon: {
+            position: 'absolute',
+            left: 0,
+            top: 4,
+            marginLeft: 0
+          },
+          dateInput: {
+            marginLeft: 36
+          }
+          // ... You can check the source to find the other keys.
+        }}
+        onDateChange={(date) => this.fetchTodayReadings(date)}/>
+                 
                 <Text style={{marginLeft:'2%'}}>Title:{this.state.ReadingList.Title}</Text>
                 <Text style={{marginLeft:'2%'}}>First Reading: {this.state.FirstReading}</Text>
                 <Text style={{marginLeft:'2%'}}>Responsorial Psalm: {this.state.Psalm}</Text>
@@ -201,15 +243,15 @@ async fetchTodayReadings(e)
                 'Second Reading: '+ this.state.SecondReading:''}</Text>
                 <Text style={{marginLeft:'2%'}}>Gospel : {this.state.Gospel}</Text>
                 <Text style={{borderBottomColor: 'black',borderBottomWidth: 1,}}></Text>
-                <Text style={{margin:'4%'}}>First Reading:{this.state.FirstReading} </Text>
+                <Text style={{margin:'4%',fontWeight:"bold"}}>First Reading:{this.state.FirstReading} </Text>
                 <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <Text style={{marginLeft:'4%',marginTop:'1%'}}>{this.state.FirstReadingBody}</Text>
-                <Text style={{margin:'4%',color:'red'}}>Responsiorial Psalm:{this.state.Psalm}</Text>
+                <Text style={{margin:'4%',color:'red',fontWeight:"bold"}}>Responsiorial Psalm:{this.state.Psalm}</Text>
                 <Text style={{marginLeft:'4%',marginTop:'1%'}}>{this.state.PsalmReadingBody}</Text>
-                <Text style={{marginLeft:'2%'}}>{this.state.SecondReading!==''?
+                <Text style={{marginLeft:'4%',marginTop:'2%',fontWeight:"bold"}}>{this.state.SecondReading!==''?
                 'Second Reading: '+ this.state.SecondReading:''}</Text>
-                <Text>{this.state.SecondReadingBody}</Text>
-                <Text style={{marginLeft:'4%'}}>Gospel : {this.state.Gospel}</Text>
+                <Text  style={{margin:'4%'}}>{this.state.SecondReadingBody}</Text>
+                <Text style={{marginLeft:'4%',fontWeight:"bold"}}>Gospel : {this.state.Gospel}</Text>
                 <Text style={{marginLeft:'4%',marginTop:'4%'}}>{this.state.GospelReadingBody}</Text>
                 <Text style={{marginLeft:'2%',fontStyle:"italic"}}>{this.state.GospelReadingBody!==''?'The gospel of the Lord...praise be to you Lord Jesus Christ!':''}</Text>
                 </ScrollView>
@@ -222,10 +264,9 @@ async fetchTodayReadings(e)
                  </Text>
              
                  }
-           
+                
            </View>
-             
-       
+           
              
              
         );

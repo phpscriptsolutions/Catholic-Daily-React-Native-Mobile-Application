@@ -5,6 +5,9 @@ import DailyMassReadings from './DailyCatholicReadings';
 import HolyRosary from './HolyRosary';
 import DivineMercy from './DivineMercy';
 import AppHeader from './AppHeader';
+import FontAwesome, { SolidIcons, RegularIcons, BrandIcons } from 'react-native-fontawesome';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
 class About extends React.Component {
   render() {
     return (
@@ -20,10 +23,38 @@ class About extends React.Component {
 
 
 const TabNavigator = createBottomTabNavigator({
-   "Daily Readings": { screen: DailyMassReadings },
-   "Holy Rosary": { screen: HolyRosary },
-   "Divine Mercy":{screen:DivineMercy},
-   "About Us":{screen:About}
+   "Daily Readings": { screen: DailyMassReadings,navigationOptions: {
+    tabBarLabel: 'Daily Readings',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="home" size={30} color="#900" />
+    )
+  },tabBarOptions: { 
+    activeTintColor: '#e91e63'
+  } },
+   "Holy Rosary": { screen: HolyRosary,navigationOptions: {
+    tabBarLabel: 'Holy Rosary',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="home" size={30} color="#900" />
+    )
+  },tabBarOptions: { 
+    activeTintColor: '#e91e63'
+  }  },
+   "Divine Mercy":{screen:DivineMercy,navigationOptions: {
+    tabBarLabel: 'Divine Mercy',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="home" size={30} color="#900" />
+    )
+  },tabBarOptions: { 
+    activeTintColor: '#e91e63'
+  } },
+   "About Us":{screen:About,navigationOptions: {
+    tabBarLabel: 'About',
+    tabBarIcon: ({ tintColor }) => (
+      <Icon name="pray" size={30} color="#900"  />
+    )
+  },tabBarOptions: { 
+    activeTintColor: '#e91e63'
+  } }
 });
 
 
