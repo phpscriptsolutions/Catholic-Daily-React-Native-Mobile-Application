@@ -5,6 +5,7 @@ import DailyMassReadings from './DailyCatholicReadings';
 import HolyRosary from './HolyRosary';
 import DivineMercy from './DivineMercy';
 import AppHeader from './AppHeader';
+import StationsOfTheCross  from './Stationsofthecross';
 import FontAwesome, { SolidIcons, RegularIcons, BrandIcons } from 'react-native-fontawesome';
 
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -34,7 +35,7 @@ const TabNavigator = createBottomTabNavigator({
    "Holy Rosary": { screen: HolyRosary,navigationOptions: {
     tabBarLabel: 'Holy Rosary',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="home" size={30} color="#900" />
+      <Icon name="users" size={30} color="#900" />
     )
   },tabBarOptions: { 
     activeTintColor: '#e91e63'
@@ -42,15 +43,15 @@ const TabNavigator = createBottomTabNavigator({
    "Divine Mercy":{screen:DivineMercy,navigationOptions: {
     tabBarLabel: 'Divine Mercy',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="home" size={30} color="#900" />
+      <Icon name="users" size={30} color="#900" />
     )
   },tabBarOptions: { 
     activeTintColor: '#e91e63'
   } },
-   "About Us":{screen:About,navigationOptions: {
-    tabBarLabel: 'About',
+   "Statations":{screen:StationsOfTheCross,navigationOptions: {
+    tabBarLabel: 'Statations',
     tabBarIcon: ({ tintColor }) => (
-      <Icon name="pray" size={30} color="#900"  />
+      <Icon name="heart-o" size={30} color="#900"  />
     )
   },tabBarOptions: { 
     activeTintColor: '#e91e63'
