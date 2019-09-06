@@ -1,16 +1,27 @@
 import React,{Component} from 'react';
-import {View,Text,ScrollView,Image,StyleSheet,Button} from 'react-native';
+import {View,Text,ScrollView,StyleSheet,Button} from 'react-native';
 import AppHeader from './AppHeader';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 export default class StationsOfTheCross extends Component{
 
+    constructor()
+    {
+        super();
+        this.state={
+            station:1
+        }
+    }
+
+
 render()
 {
+
     return(
         <ScrollView>
             <AppHeader title ='Stations of the cross'/>
-            <View on>
+            
+            <View>
                 <Text style={styles.StationHeader}>First Station</Text>
                
                 <Text style={styles.StationName}>Jesus is condemed to death!</Text>
@@ -36,7 +47,6 @@ All: Because by Thy holy cross Thou hast redeemed the world.`}</Text>
  Remove the blinkers from my eyes
  that I may see that it is you whom I serve
  in all that hold me to account.
-  
  Lord it is you.`}</Text>
 
  <Text style={styles.StationText}>{`Our Father.... Hail Mary.... Glory Be to the Father....

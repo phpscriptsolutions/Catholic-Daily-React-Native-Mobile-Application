@@ -97,6 +97,7 @@ async fetchReadingText(e)
 
             var FirstReadingText='';
             var Psalm='';
+            var PsalmArray=[];
             var SecondReadingText='';
             var GospelReadingText='';
 
@@ -105,8 +106,9 @@ async fetchReadingText(e)
                     FirstReadingText=FirstReadingText+e.Text
 
                  })
-
+                 var i=1;
                  this.state.PsalmReadingText.map(e=>{
+                     
                     Psalm=Psalm+e.Text
 
                  })
@@ -125,6 +127,8 @@ async fetchReadingText(e)
                       GospelReadingText=GospelReadingText+e.Text
                      
                  })
+
+                // PsalmArray.push(Psalm.split('.'));
               
                 this.setState({FirstReadingBody:FirstReadingText})
                 this.setState({PsalmReadingBody:Psalm})
@@ -139,9 +143,6 @@ async fetchTodayReadings(e)
         this.setState({NetworkState:state.isConnected});
          
      })
-     
-  
-    
     await fetch('https://www.ewtn.com/se/readings/readingsservice.svc/day/'+e+'/en')
     .then((response)=>response.json())
     .catch((err)=>{
@@ -204,14 +205,9 @@ this.setState({DateClicked:true})
     {
         
         return(
-            
-
             <View>
-                
-                
                  {this.state.NetworkState?
             <ScrollView>
- 
             <AppHeader title='Daily Mass Readings' color={this.state.ReadingList.Color} />
             <DatePicker
         style={{width: 200}}
@@ -245,14 +241,17 @@ this.setState({DateClicked:true})
                 <Text style={{borderBottomColor: 'black',borderBottomWidth: 1,}}></Text>
                 <Text style={{margin:'4%',fontWeight:"bold"}}>First Reading:{this.state.FirstReading} </Text>
                 <ScrollView contentContainerStyle={{flexGrow:1}}>
-                <Text style={{marginLeft:'4%',marginTop:'1%'}}>{this.state.FirstReadingBody}</Text>
+                <Text style={{marginLeft:'4%',marginTop:'1%',marginRight:'4%'}}>{this.state.FirstReadingBody}</Text>
                 <Text style={{margin:'4%',color:'red',fontWeight:"bold"}}>Responsiorial Psalm:{this.state.Psalm}</Text>
-                <Text style={{marginLeft:'4%',marginTop:'1%'}}>{this.state.PsalmReadingBody}</Text>
+                {/* <Text style={{marginLeft:'4%',marginTop:'1%',marginRight:'4%'}}>{this.state.PsalmReadingBody}</Text> */}
+                {this.state.PsalmReadingText.map(e=>{
+                    return(<Text key={e.Text} style={{marginLeft:'4%',marginTop:'1%',marginRight:'4%'}}>{e.Text}</Text>)
+                })}
                 <Text style={{marginLeft:'4%',marginTop:'2%',fontWeight:"bold"}}>{this.state.SecondReading!==''?
                 'Second Reading: '+ this.state.SecondReading:''}</Text>
-                <Text  style={{margin:'4%'}}>{this.state.SecondReadingBody}</Text>
+                <Text  style={{margin:'4%',marginRight:'4%'}}>{this.state.SecondReadingBody}</Text>
                 <Text style={{marginLeft:'4%',fontWeight:"bold"}}>Gospel : {this.state.Gospel}</Text>
-                <Text style={{marginLeft:'4%',marginTop:'4%'}}>{this.state.GospelReadingBody}</Text>
+                <Text style={{marginLeft:'4%',marginTop:'4%',marginRight:'4%'}}>{this.state.GospelReadingBody}</Text>
                 <Text style={{marginLeft:'2%',fontStyle:"italic"}}>{this.state.GospelReadingBody!==''?'The gospel of the Lord...praise be to you Lord Jesus Christ!':''}</Text>
                 </ScrollView>
             </ScrollView>
