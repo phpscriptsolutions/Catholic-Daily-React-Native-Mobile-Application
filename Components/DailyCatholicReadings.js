@@ -44,7 +44,6 @@ handleOnChange(e)
     
     this.setState({[e.target.name]:e.target.value})
     this.fetchTodayReadings(e.target.value)
-    this.fetchReadingText();
 }
 
 async fetchReadingText(e)
@@ -139,6 +138,8 @@ async fetchReadingText(e)
 
 async fetchTodayReadings(e)
 {
+    this.setState({Date:e})
+    this.setState({FirstReadingBody:'',PsalmReadingBody:'',SecondReadingBody:'',GospelReadingBody:''})
     NetInfo.fetch().then(state=>{
         this.setState({NetworkState:state.isConnected});
          
@@ -215,7 +216,7 @@ this.setState({DateClicked:true})
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
-        
+        maxDate={new Date().getFullYear()+"-"+new Date().getMonth.toString()+"-"+new Date().getDate.toString()}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         customStyles={{
@@ -224,6 +225,7 @@ this.setState({DateClicked:true})
             left: 0,
             top: 4,
             marginLeft: 0
+            
           },
           dateInput: {
             marginLeft: 36
@@ -239,7 +241,7 @@ this.setState({DateClicked:true})
                 'Second Reading: '+ this.state.SecondReading:''}</Text>
                 <Text style={{marginLeft:'2%'}}>Gospel : {this.state.Gospel}</Text>
                 <Text style={{borderBottomColor: 'black',borderBottomWidth: 1,}}></Text>
-                <Text style={{margin:'4%',fontWeight:"bold"}}>First Reading:{this.state.FirstReading} </Text>
+                <Text style={{margin:'4%',fontWeight:"bold"}}>First Reading : {this.state.FirstReading} </Text>
                 <ScrollView contentContainerStyle={{flexGrow:1}}>
                 <Text style={{marginLeft:'4%',marginTop:'1%',marginRight:'4%'}}>{this.state.FirstReadingBody}</Text>
                 <Text style={{margin:'4%',color:'red',fontWeight:"bold"}}>Responsiorial Psalm:{this.state.Psalm}</Text>
