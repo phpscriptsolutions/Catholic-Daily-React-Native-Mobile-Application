@@ -46,16 +46,17 @@ const TabNavigator = createBottomTabNavigator({
       <Icon name="users" size={30} color="#900" />
     )
   },tabBarOptions: { 
-    activeTintColor: '#e91e63'
-  } },
-   "Statations":{screen:StationsOfTheCross,navigationOptions: {
-    tabBarLabel: 'Statations',
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="heart-o" size={30} color="#900"  />
-    )
-  },tabBarOptions: { 
-    activeTintColor: '#e91e63'
+    activeTintColor: '#fff'
   } }
+  // ,
+  //  "Statations":{screen:StationsOfTheCross,navigationOptions: {
+  //   tabBarLabel: 'Statations',
+  //   tabBarIcon: ({ tintColor }) => (
+  //     <Icon name="heart-o" size={30} color="#900"  />
+  //   )
+  // },tabBarOptions: { 
+  //   activeTintColor: '#e91e63'
+  // } }
 });
 
 

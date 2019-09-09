@@ -159,49 +159,38 @@ async fetchTodayReadings(e)
     })
     .catch((err)=>{
      
-        Alert.alert('Error','Reading not available for ' + e);
-        this.setState({Error:err})
+    Alert.alert('Error','Reading not available for ' + e);
+    this.setState({Error:err})
      return;
     });
     if(this.state.Error!=='')
     {
-        Alert.alert('Error','Reading not available for ' + e);
-        return;
+    Alert.alert('Error','Reading not available for ' + e);
+    return;
     }
     this.state.ReadingList.ReadingGroups[0].Readings.length===4?
 
-         this.setState({FirstReading:this.state.ReadingList.ReadingGroups[0].Readings[0].Citations[0].Reference,
-                     Psalm:this.state.ReadingList.ReadingGroups[0].Readings[1].Citations[0].Reference,
-                 SecondReading:  this.state.ReadingList.ReadingGroups[0].Readings[2].Type==='Reading 2'?
-        this.state.ReadingList.ReadingGroups[0].Readings[2].Citations[0].Reference:'',
-                Gospel:this.state.ReadingList.ReadingGroups[0].Readings[3].Citations[0].Reference})
-                :  this.setState({FirstReading:this.state.ReadingList.ReadingGroups[0].Readings[0].Citations[0].Reference,
-                            Psalm:this.state.ReadingList.ReadingGroups[0].Readings[1].Citations[0].Reference,
-                            Gospel:this.state.ReadingList.ReadingGroups[0].Readings[2].Citations[0].Reference,
-                        SecondReading:''})
-                        this.fetchReadingText(e);
-}
-
-DateChange()
-{
-this.setState({DateClicked:true})
+    this.setState({FirstReading:this.state.ReadingList.ReadingGroups[0].Readings[0].Citations[0].Reference,
+    Psalm:this.state.ReadingList.ReadingGroups[0].Readings[1].Citations[0].Reference,
+    SecondReading:this.state.ReadingList.ReadingGroups[0].Readings[2].Type==='Reading 2'?
+    this.state.ReadingList.ReadingGroups[0].Readings[2].Citations[0].Reference:'',
+    Gospel:this.state.ReadingList.ReadingGroups[0].Readings[3].Citations[0].Reference})
+    :this.setState({FirstReading:this.state.ReadingList.ReadingGroups[0].Readings[0].Citations[0].Reference,
+    Psalm:this.state.ReadingList.ReadingGroups[0].Readings[1].Citations[0].Reference,
+    Gospel:this.state.ReadingList.ReadingGroups[0].Readings[2].Citations[0].Reference,
+    SecondReading:''})
+    this.fetchReadingText(e);
 }
 
  componentDidMount()
 {
- 
-    
     if(!this.state.NetworkState)
     {
         var date=new Date().getFullYear()+'-'+ parseInt(new Date().getMonth()+1)+'-'+new Date().getDate().toString();
         this.setState({Date:date})
          this.fetchTodayReadings(date)
     }
-  
-  
 }
-
-
     render()
     {
         
@@ -216,7 +205,6 @@ this.setState({DateClicked:true})
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
-        maxDate={new Date().getFullYear()+"-"+new Date().getMonth.toString()+"-"+new Date().getDate.toString()}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         customStyles={{
